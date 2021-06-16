@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.font import *
+from Map import Map
 from components.buttons import BackButton, UnitButton, UpgradeButton
 
 
@@ -18,7 +19,7 @@ class Game(Frame):
         self.backButton = BackButton(self.topFrame)
         self.backButton.pack(side=LEFT)
 
-        self.map = Canvas(self, width=1200, height=600, background="red")
+        self.map = Map(self, width=1200, height=600)
         self.map.pack()
 
         self.bottomFrame = Frame(self)
