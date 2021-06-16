@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter.font import *
 from Game import Game
 from LevelPage import LevelPage
-from component import *
+from components.buttons import *
 
 
 class MainApplication(Frame):

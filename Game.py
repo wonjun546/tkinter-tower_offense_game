@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter.font import *
-from component import BackButton
+from components.buttons import BackButton
 
 
 class Game(Frame):

@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter.font import *
-from component import MainButton, BackButton, LevelButton
+from components.buttons import MainButton, BackButton, LevelButton
 
 
 class LevelPage(Frame):
