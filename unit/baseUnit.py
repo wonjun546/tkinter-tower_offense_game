@@ -3,7 +3,8 @@ def dist(p1, p2):
 
 
 class baseUnit:
-    def __init__(self, parent):
+    def __init__(self, canvas):
+        self.canvas = canvas
         self.road = [
             (0, 450),
             (200, 400),
@@ -14,16 +15,17 @@ class baseUnit:
             (1000, 200),
             (1200, 150),
         ]
-        self.hpbarBackground = parent.create_rectangle(-25, 420, 25, 410, fill="gray")
-        self.hpbar = parent.create_rectangle(-24, 419, 24, 411, fill="red")
+        self.hpbarBackground = canvas.create_rectangle(-25, 420, 25, 410, fill="gray")
+        self.hpbar = canvas.create_rectangle(-24, 419, 24, 411, fill="red")
 
     def nextPosition(self):
         if len(self.road) == 1:
             return (0, 0)
-        (x1, y1, x2, y2) = self.parent.coords(self.id)
+        (x1, y1, x2, y2) = self.canvas.coords(self.id)
         _x, _y = (x1 + x2) / 2, (y1 + y2) / 2  # center
         x, y, length = _x, _y, self.speed
         if dist((_x, _y), self.road[1]) < self.speed:  # corner of road
+            self.attacked(15)
             length -= dist((_x, _y), self.road[1])
             x, y = self.road[1]
             self.road.pop(0)
@@ -38,12 +40,12 @@ class baseUnit:
 
     def attacked(self, attack):
         if self.HP <= attack:
-            self.parent.destroy(self.id)
-            self.parent.destroy(self.hpbar)
-            self.parent.destroy(self.hpbarBackground)
-            self.parent.unitList.remove(self)
+            self.canvas.delete(self.id)
+            self.canvas.delete(self.hpbar)
+            self.canvas.delete(self.hpbarBackground)
+            self.canvas.unitList.remove(self.parent)
         else:
             self.HP -= attack
-            (x1, y1, x2, y2) = self.parent.coords(self.id)
+            (x1, y1, x2, y2) = self.canvas.coords(self.hpbar)
             x2 = x1 + self.HP / self.maxHP * 48
-            self.parent.coords(self.id, x1, y1, x2, y2)
+            self.canvas.coords(self.hpbar, x1, y1, x2, y2)
