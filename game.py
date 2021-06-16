@@ -36,9 +36,9 @@ class UnitFrame(Frame):
         self.configure(highlightbackground="black")
         self.configure(highlightthickness=1)
         self.parent = parent
-        self.unitCost = ["$10", "$20", "$40", "$80", "$150", "$300", "$1000"]
+        self.unitCosts = ["$10", "$20", "$40", "$80", "$150", "$300", "$1000"]
         self.unitButtons = [UnitButton(self, i) for i in range(1, 8)]
-        self.unitLabels = [Label(self, text=i) for i in self.unitCost]
+        self.unitLabels = [Label(self, text=i) for i in self.unitCosts]
         for (i, B, L) in zip(range(7), self.unitButtons, self.unitLabels):
             B.grid(row=0, column=i, padx=15, pady=(20, 0))
             L.grid(row=1, column=i, padx=15, pady=5)
@@ -51,9 +51,9 @@ class UpgradeFrame(Frame):
         self.configure(highlightthickness=1)
         self.parent = parent
         self.upgradeParams = ["attack", "HP", "speed", "money"]
-        self.upgradeCost = ["$100", "$100", "$100", "$100"]
+        self.upgradeCosts = ["$100", "$100", "$100", "$100"]
         self.upgradeButtons = [UpgradeButton(self, i) for i in self.upgradeParams]
-        self.upgradeLabels = [Label(self, text=i) for i in self.upgradeCost]
+        self.upgradeLabels = [Label(self, text=i) for i in self.upgradeCosts]
         for (i, B, L) in zip(range(7), self.upgradeButtons, self.upgradeLabels):
             B.grid(row=0, column=i, padx=20, pady=(20, 0))
             L.grid(row=1, column=i, padx=20, pady=5)

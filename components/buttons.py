@@ -35,11 +35,21 @@ class LevelButton(MainButton):
 
 
 class UnitButton(Button):
-    def __init__(self, parent, unitnumber, *args, **kwargs):
+    def __init__(self, parent, unitNumber, *args, **kwargs):
         Button.__init__(self, parent, *args, **kwargs)
         self.parent = parent
-        self.configure(text=str(unitnumber))
+        self.configure(text=str(unitNumber))
         self.configure(width=2, height=2)
+
+        def command():
+            diffMoney = int(self.parent.parent.money.get()[1:]) - int(
+                self.parent.unitCosts[unitNumber - 1][1:]
+            )
+            if diffMoney >= 0:
+                self.parent.parent.map.addUnit(unitNumber)
+                self.parent.parent.money.set("$" + str(diffMoney))
+
+        self.configure(command=command)
 
 
 class UpgradeButton(Button):

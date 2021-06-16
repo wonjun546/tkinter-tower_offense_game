@@ -31,6 +31,6 @@ class Map(Canvas):
             capstyle=ROUND,
             fill="#613613",
         )
-    
+
     def addUnit(self, unit):
-        pass
+        print(unit, "spawned")
