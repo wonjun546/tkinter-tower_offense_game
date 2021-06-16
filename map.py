@@ -1,4 +1,6 @@
 from tkinter import *
+import time
+from unit import Unit
 
 
 class Map(Canvas):
@@ -32,5 +34,13 @@ class Map(Canvas):
             fill="#613613",
         )
 
-    def addUnit(self, unit):
-        print(unit, "spawned")
+    def addUnit(self, unitId):
+        print(unitId, "spawned")
+        self.unitList.append(Unit(self, unitId))
+
+    def nextFrame(self):
+        for unit in self.unitList:
+            unit.update()
+        for tower in self.towerList:
+            tower.update()
+        time.sleep(0.05)
