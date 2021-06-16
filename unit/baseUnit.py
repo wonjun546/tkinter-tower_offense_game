@@ -3,7 +3,7 @@ def dist(p1, p2):
 
 
 class baseUnit:
-    def __init__(self):
+    def __init__(self, parent):
         self.road = [
             (0, 450),
             (200, 400),
@@ -14,6 +14,8 @@ class baseUnit:
             (1000, 200),
             (1200, 150),
         ]
+        self.hpbarBackground = parent.create_rectangle(-25, 420, 25, 410, fill="gray")
+        self.hpbar = parent.create_rectangle(-24, 419, 24, 411, fill="red")
 
     def nextPosition(self):
         if len(self.road) == 1:
@@ -33,3 +35,15 @@ class baseUnit:
         x += xvec * length / mag  # x_1 = x_0 + dx
         y = yvec / xvec * (x - self.road[0][0]) + self.road[0][1]  # correction
         return (x - _x, y - _y)
+
+    def attacked(self, attack):
+        if self.HP <= attack:
+            self.parent.destroy(self.id)
+            self.parent.destroy(self.hpbar)
+            self.parent.destroy(self.hpbarBackground)
+            self.parent.unitList.remove(self)
+        else:
+            self.HP -= attack
+            (x1, y1, x2, y2) = self.parent.coords(self.id)
+            x2 = x1 + self.HP / self.maxHP * 48
+            self.parent.coords(self.id, x1, y1, x2, y2)
