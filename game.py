@@ -16,6 +16,7 @@ class Game(Frame):
         self.backButton.grid(row=0, column=2)
 
         self.map = Map(self, width=1200, height=600, background="green")
+        self.after(20, self.map.nextFrame)
         self.map.grid(row=1, column=0, columnspan=3)
 
         self.unitFrame = UnitFrame(self)

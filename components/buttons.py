@@ -22,6 +22,8 @@ class BackButton(Button):
 
         def command():
             self.parent.pack_forget()
+            if type(self.parent).__name__ == "Game":
+                self.parent.parent.Game.destroy()
             self.parent.parent.Main.pack()
 
         self.configure(command=command)

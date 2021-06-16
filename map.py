@@ -1,5 +1,4 @@
 from tkinter import *
-import time
 from unit import Unit
 
 
@@ -43,4 +42,4 @@ class Map(Canvas):
             unit.update()
         for tower in self.towerList:
             tower.update()
-        time.sleep(0.05)
+        self.after(20, self.nextFrame)

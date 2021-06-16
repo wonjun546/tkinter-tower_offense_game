@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.font import *
 from components.buttons import MainButton, BackButton, LevelButton
+from game import Game
 
 
 class LevelPage(Frame):
@@ -26,5 +27,6 @@ class LevelPage(Frame):
 
     def command(self, difficulty):
         self.pack_forget()
+        self.parent.Game = Game(self.parent)
         self.parent.Game.difficulty.set(difficulty)
         self.parent.Game.pack()
