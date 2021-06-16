@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter.font import *
-from Map import Map
+from map import Map
 from components.buttons import BackButton, UnitButton, UpgradeButton
 
 
@@ -8,27 +8,21 @@ class Game(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
-        self.topFrame = Frame(self)
-        self.topFrame.pack()
         self.difficulty = StringVar()
-        self.title = Label(
-            self.topFrame, textvariable=self.difficulty, font=Font(size=50), width=10
-        )
-        self.title.pack(side=LEFT, expand=YES)
+        self.title = Label(self, textvariable=self.difficulty, font=Font(size=50), width=10)
+        self.title.grid(row=0, column=0)
 
-        self.backButton = BackButton(self.topFrame)
-        self.backButton.pack(side=LEFT)
+        self.backButton = BackButton(self)
+        self.backButton.grid(row=0, column=1)
 
-        self.map = Map(self, width=1200, height=600)
-        self.map.pack()
+        self.map = Map(self, width=1200, height=600, background="green")
+        self.map.grid(row=1, column=0, columnspan=2)
 
-        self.bottomFrame = Frame(self)
-        self.bottomFrame.pack()
-        self.unitFrame = UnitFrame(self.bottomFrame)
-        self.unitFrame.pack(side=LEFT)
+        self.unitFrame = UnitFrame(self)
+        self.unitFrame.grid(row=2, column=0)
 
-        self.upgradeFrame = UpgradeFrame(self.bottomFrame)
-        self.upgradeFrame.pack(side=LEFT)
+        self.upgradeFrame = UpgradeFrame(self)
+        self.upgradeFrame.grid(row=2, column=1)
 
 
 class UnitFrame(Frame):

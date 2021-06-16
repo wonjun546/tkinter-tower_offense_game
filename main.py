@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter.font import *
-from Game import Game
-from LevelPage import LevelPage
+from game import Game
+from levelPage import LevelPage
 from components.buttons import MainButton
 
 
