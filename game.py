@@ -10,19 +10,24 @@ class Game(Frame):
         self.parent = parent
         self.difficulty = StringVar()
         self.title = Label(self, textvariable=self.difficulty, font=Font(size=50), width=10)
-        self.title.grid(row=0, column=0)
+        self.title.grid(row=0, column=0, columnspan=2)
 
         self.backButton = BackButton(self)
-        self.backButton.grid(row=0, column=1)
+        self.backButton.grid(row=0, column=2)
 
         self.map = Map(self, width=1200, height=600, background="green")
-        self.map.grid(row=1, column=0, columnspan=2)
+        self.map.grid(row=1, column=0, columnspan=3)
 
         self.unitFrame = UnitFrame(self)
         self.unitFrame.grid(row=2, column=0)
 
         self.upgradeFrame = UpgradeFrame(self)
         self.upgradeFrame.grid(row=2, column=1)
+
+        self.money = StringVar()
+        self.money.set("$40")
+        self.moneyLabel = Label(self, textvariable=self.money)
+        self.moneyLabel.grid(row=2, column=2)
 
 
 class UnitFrame(Frame):

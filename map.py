@@ -5,6 +5,10 @@ class Map(Canvas):
     def __init__(self, parent, *args, **kwargs):
         Canvas.__init__(self, parent, *args, **kwargs)
         self.parent = parent
+
+        self.unitList = []
+        self.towerList = []
+
         # road
         self.create_line(
             0,
@@ -27,3 +31,6 @@ class Map(Canvas):
             capstyle=ROUND,
             fill="#613613",
         )
+    
+    def addUnit(self, unit):
+        pass
