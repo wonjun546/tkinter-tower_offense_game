@@ -37,7 +37,6 @@ class Map(Canvas):
         self.towerList.append(Tower(self, 1, (500, 400)))
 
     def addUnit(self, unitId):
-        print(unitId, "spawned")
         self.unitList.append(Unit(self, unitId))
 
     def nextFrame(self):
@@ -45,4 +44,5 @@ class Map(Canvas):
             unit.update()
         for tower in self.towerList:
             tower.update()
+        self.parent.moneyLabel.configure(text=self.parent.money)
         self.after(20, self.nextFrame)

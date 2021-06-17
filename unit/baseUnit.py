@@ -19,6 +19,17 @@ class baseUnit:
         self.hpbarBackground = canvas.create_rectangle(-25, 420, 25, 410, fill="gray")
         self.hpbar = canvas.create_rectangle(-24, 419, 24, 411, fill="red")
 
+    def update(self):
+        if not self.inBattle:
+            enemy = self.nearEnemy()
+            if enemy != None:
+                self.attackAction(self.canvas.towerList[enemy])
+            else:
+                dx, dy = self.nextPosition()
+                self.canvas.move(self.id, dx, dy)
+                self.canvas.move(self.hpbar, dx, dy)
+                self.canvas.move(self.hpbarBackground, dx, dy)
+
     def nextPosition(self):
         if len(self.road) == 1:
             return (0, 0)
@@ -54,7 +65,6 @@ class baseUnit:
 
     def attackAction(self, tower):
         if tower in self.canvas.towerList and self.HP > 0:
-            print(self.HP)
             tower.tower.attacked(self.attack)
             self.canvas.after(int(1000 * self.attackRate), lambda: self.attackAction(tower))
         else:

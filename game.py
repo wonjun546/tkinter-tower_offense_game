@@ -25,10 +25,27 @@ class Game(Frame):
         self.upgradeFrame = UpgradeFrame(self)
         self.upgradeFrame.grid(row=2, column=1)
 
-        self.money = StringVar()
-        self.money.set("$40")
-        self.moneyLabel = Label(self, textvariable=self.money)
+        self.money = Money(40)
+        self.moneyLabel = Label(self, text=self.money)
         self.moneyLabel.grid(row=2, column=2)
+
+
+class Money:
+    def __init__(self, value=0):
+        self.value = value
+
+    def get(self):
+        return self.value
+
+    def set(self, newValue):
+        self.value = newValue
+
+    def __iadd__(self, other):
+        self.value += int(other)  # other = int
+        return self
+
+    def __str__(self):
+        return "$" + str(self.value)
 
 
 class UnitFrame(Frame):
@@ -37,7 +54,15 @@ class UnitFrame(Frame):
         self.configure(highlightbackground="black")
         self.configure(highlightthickness=1)
         self.parent = parent
-        self.unitCosts = ["$10", "$20", "$40", "$80", "$150", "$300", "$1000"]
+        self.unitCosts = [
+            Money(10),
+            Money(20),
+            Money(40),
+            Money(80),
+            Money(150),
+            Money(300),
+            Money(1000),
+        ]
         self.unitButtons = [UnitButton(self, i) for i in range(1, 8)]
         self.unitLabels = [Label(self, text=i) for i in self.unitCosts]
         for (i, B, L) in zip(range(7), self.unitButtons, self.unitLabels):

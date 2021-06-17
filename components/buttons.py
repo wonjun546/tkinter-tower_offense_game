@@ -44,12 +44,10 @@ class UnitButton(Button):
         self.configure(width=2, height=2)
 
         def command():
-            diffMoney = int(self.parent.parent.money.get()[1:]) - int(
-                self.parent.unitCosts[unitId - 1][1:]
-            )
+            diffMoney = self.parent.parent.money.get() - self.parent.unitCosts[unitId - 1].get()
             if diffMoney >= 0:
                 self.parent.parent.map.addUnit(unitId)
-                self.parent.parent.money.set("$" + str(diffMoney))
+                self.parent.parent.money.set(diffMoney)
 
         self.configure(command=command)
 
