@@ -5,6 +5,7 @@ def dist(p1, p2):
 class baseUnit:
     def __init__(self, canvas):
         self.canvas = canvas
+        self.inBattle = False
         self.road = [
             (0, 450),
             (200, 400),
@@ -25,7 +26,6 @@ class baseUnit:
         _x, _y = (x1 + x2) / 2, (y1 + y2) / 2  # center
         x, y, length = _x, _y, self.speed
         if dist((_x, _y), self.road[1]) < self.speed:  # corner of road
-            self.attacked(15)
             length -= dist((_x, _y), self.road[1])
             x, y = self.road[1]
             self.road.pop(0)
@@ -40,12 +40,40 @@ class baseUnit:
 
     def attacked(self, attack):
         if self.HP <= attack:
+            self.HP = 0
             self.canvas.delete(self.id)
             self.canvas.delete(self.hpbar)
             self.canvas.delete(self.hpbarBackground)
-            self.canvas.unitList.remove(self.parent)
+            self.inBattle = False
+            del self.canvas.unitList[self.canvas.unitList.index(self.parent)]
         else:
             self.HP -= attack
             (x1, y1, x2, y2) = self.canvas.coords(self.hpbar)
             x2 = x1 + self.HP / self.maxHP * 48
             self.canvas.coords(self.hpbar, x1, y1, x2, y2)
+
+    def attackAction(self, tower):
+        if tower in self.canvas.towerList and self.HP > 0:
+            print(self.HP)
+            tower.tower.attacked(self.attack)
+            self.canvas.after(int(1000 * self.attackRate), lambda: self.attackAction(tower))
+        else:
+            self.inBattle = False
+
+    def distance(self, other):
+        x1, y1, x2, y2 = self.canvas.coords(self.id)
+        z1, w1, z2, w2 = other.canvas.coords(other.id)
+        return 0.5 * ((x1 + x2 - z1 - z2) ** 2 + (y1 + y2 - w1 - w2) ** 2) ** 0.5
+
+    def nearEnemy(self):
+        if self.canvas.towerList:
+            dist = [-1, self.range]
+            for i in range(len(self.canvas.towerList)):
+                unit = self.canvas.towerList[i].tower
+                newdist = self.distance(unit)
+                if newdist < dist[1]:
+                    dist[1] = newdist
+                    dist[0] = i
+            if dist[0] != -1:
+                self.inBattle = True
+                return dist[0]

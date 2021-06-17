@@ -1,7 +1,5 @@
 from tkinter import *
 from tkinter.font import *
-from time import sleep
-from game import Game
 from levelPage import LevelPage
 from components.buttons import MainButton
 
@@ -14,6 +12,7 @@ class MainApplication(Frame):
         self.LevelPage = LevelPage(self)
         self.Game = None
         self.Main.pack()
+
 
 class Main(Frame):
     def __init__(self, parent, *args, **kwargs):

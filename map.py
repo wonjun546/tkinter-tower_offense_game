@@ -1,5 +1,6 @@
 from tkinter import *
 from unit import Unit
+from tower import Tower
 
 
 class Map(Canvas):
@@ -32,6 +33,8 @@ class Map(Canvas):
             capstyle=ROUND,
             fill="#613613",
         )
+        # tower
+        self.towerList.append(Tower(self, 1, (500, 400)))
 
     def addUnit(self, unitId):
         print(unitId, "spawned")
