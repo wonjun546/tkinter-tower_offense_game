@@ -66,6 +66,8 @@ class UnitFrame(Frame):
         self.unitButtons = [UnitButton(self, i) for i in range(1, 8)]
         self.unitLabels = [Label(self, text=i) for i in self.unitCosts]
         for (i, B, L) in zip(range(7), self.unitButtons, self.unitLabels):
+            B.bind("<Enter>", B.mouseHoverIn)
+            B.bind("<Leave>", B.mouseHoverOut)
             B.grid(row=0, column=i, padx=15, pady=(20, 0))
             L.grid(row=1, column=i, padx=15, pady=5)
 

@@ -34,7 +34,10 @@ class Map(Canvas):
             fill="#613613",
         )
         # tower
-        self.towerList.append(Tower(self, 1, (500, 400)))
+        self.towerList.append(Tower(self, 1, (500, 375)))
+        self.towerList.append(Tower(self, 1, (820, 520)))
+        self.towerList.append(Tower(self, 1, (730, 240)))
+        self.towerList.append(Tower(self, 1, (370, 80)))
 
     def addUnit(self, unitId):
         self.unitList.append(Unit(self, unitId))

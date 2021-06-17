@@ -28,7 +28,7 @@ class baseTower:
     def attacked(self, attack):
         if self.HP <= attack:
             self.HP = 0
-            self.canvas.parent.money += self.maxHP * self.const() / 10
+            self.canvas.parent.money += self.maxHP * self.const() / 50
             self.canvas.delete(self.id)
             self.canvas.delete(self.hpbar)
             self.canvas.delete(self.hpbarBackground)

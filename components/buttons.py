@@ -40,8 +40,18 @@ class UnitButton(Button):
     def __init__(self, parent, unitId, *args, **kwargs):
         Button.__init__(self, parent, *args, **kwargs)
         self.parent = parent
+        self.unitId = unitId
         self.configure(text=str(unitId))
         self.configure(width=2, height=2)
+        self.description = [
+            "1) basic unit.\n  HP: 50, DPS: 2.5, range:200, speed: 5",
+            "2) tanker unit.\n  HP: 300, speed: 5",
+            "3) unknown unit.\n  HP: ?, speed: ?",
+            "4) unknown unit.\n  HP: ?, speed: ?",
+            "5) unknown unit.\n  HP: ?, speed: ?",
+            "6) unknown unit.\n  HP: ?, speed: ?",
+            "7) unknown unit.\n  HP: ?, speed: ?",
+        ]
 
         def command():
             diffMoney = self.parent.parent.money.get() - self.parent.unitCosts[unitId - 1].get()
@@ -50,6 +60,14 @@ class UnitButton(Button):
                 self.parent.parent.money.set(diffMoney)
 
         self.configure(command=command)
+
+    def mouseHoverIn(self, _):
+        self.tip = self.parent.parent.map.create_text(
+            10, 570, text=self.description[self.unitId - 1], anchor=W
+        )
+
+    def mouseHoverOut(self, _):
+        self.parent.parent.map.delete(self.tip)
 
 
 class UpgradeButton(Button):
