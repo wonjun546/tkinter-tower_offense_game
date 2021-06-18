@@ -14,30 +14,45 @@ class Map(Canvas):
         # road
         self.create_line(
             0,
-            450,
-            200,
-            400,
-            600,
             500,
-            900,
-            375,
-            300,
-            225,
-            600,
-            100,
-            1000,
-            200,
-            1200,
+            450,
+            500,
+            450,
             150,
-            width=100,
+            200,
+            150,
+            200,
+            360,
+            1100,
+            360,
+            1100,
+            560,
+            800,
+            560,
+            800,
+            50,
+            550,
+            50,
+            550,
+            250,
+            1200,
+            250,
+            
+            width=40,
             capstyle=ROUND,
             fill="#613613",
         )
         # tower
-        self.towerList.append(Tower(self, 1, (500, 375)))
-        self.towerList.append(Tower(self, 1, (820, 520)))
-        self.towerList.append(Tower(self, 1, (730, 240)))
-        self.towerList.append(Tower(self, 1, (370, 80)))
+        self.towerList.append(Tower(self, 1, (500, 80)))
+        self.towerList.append(Tower(self, 1, (150,250)))
+        self.towerList.append(Tower(self, 1, (400,200)))
+        self.towerList.append(Tower(self, 1, (550,310)))
+        self.towerList.append(Tower(self, 1, (750,420)))
+        self.towerList.append(Tower(self, 1, (1000,510)))
+        self.towerList.append(Tower(self, 1, (900,310)))
+        self.towerList.append(Tower(self, 1, (750,200)))
+        self.towerList.append(Tower(self, 1, (100,450)))
+        self.towerList.append(Tower(self, 1, (1100,200)))
 
     def addUnit(self, unitId):
         self.unitList.append(Unit(self, unitId))
