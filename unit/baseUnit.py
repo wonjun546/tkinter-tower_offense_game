@@ -7,14 +7,18 @@ class baseUnit:
         self.canvas = canvas
         self.inBattle = False
         self.road = [
-            (0, 450),
-            (200, 400),
-            (600, 500),
-            (900, 375),
-            (300, 225),
-            (600, 100),
-            (1000, 200),
-            (1200, 150),
+            (0,500),
+            (450,500),
+            (450,150),
+            (200,150),
+            (200,360),
+            (1100,360),
+            (1100,560),
+            (800,560),
+            (800,50),
+            (550,50),
+            (550,250),
+            (1200,250),
         ]
         self.hpbarBackground = canvas.create_rectangle(-25, 420, 25, 410, fill="gray")
         self.hpbar = canvas.create_rectangle(-24, 419, 24, 411, fill="red")
